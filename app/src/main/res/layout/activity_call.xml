@@ -6,6 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".CallActivity">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/brown"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32999998">
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_gravity="top|center_horizontal"
+            android:gravity="center_horizontal"
+            android:singleLine="true"
+            android:text="Username"
+            android:textAlignment="center"
+            android:textColor="@color/red"
+            android:textSize="17dp" />
+
+        <ImageView
+            android:id="@+id/user_pic"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_cool" />
+
+        <TextView
+            android:id="@+id/user_location"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:singleLine="true"
+            android:text="Location"
+            android:textAlignment="center"
+            android:textColor="@color/red"
+            android:textSize="17dp" />
+
+    </androidx.cardview.widget.CardView>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/hangup"
         android:layout_width="wrap_content"
@@ -32,6 +79,18 @@
         app:layout_constraintVertical_bias="0.0" />
 
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/speaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Speaker"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.402"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/answer"
+        app:layout_constraintVertical_bias="0.288" />
 
     <TextView
         android:id="@+id/status"
@@ -44,5 +103,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.385" />
+
+    <Chronometer
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/status"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/status"
+        app:layout_constraintTop_toTopOf="@+id/status" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "992724675079",
+    "project_id": "housestoryprojec-1615505638908",
+    "storage_bucket": "housestoryprojec-1615505638908.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992724675079:android:bfd2fb7457a2c61f5d18a2",
+        "android_client_info": {
+          "package_name": "commercial.dlab.abs_it"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "992724675079-pcn6t3qa4lqeem7puests9kfegjk2v13.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6AHs1hzJ9Chch6dn905XDeTmyhsmyFV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "992724675079-pcn6t3qa4lqeem7puests9kfegjk2v13.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,11 @@
 package commercial.dlab.abs_it;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.CallLog;
 import android.telecom.Call;
 import android.telecom.VideoProfile;
 
@@ -10,10 +14,11 @@ import androidx.annotation.RequiresApi;
 
 import io.reactivex.subjects.BehaviorSubject;
 
+import static android.content.Context.AUDIO_SERVICE;
+
 public class OnGoingCall {
     public static BehaviorSubject<Integer> state = BehaviorSubject.create();
     private static Call call;
-    AudioManager audioManager;
     @RequiresApi(api = Build.VERSION_CODES.M)
     private Object callback = new Call.Callback() {
         @Override
@@ -49,11 +54,12 @@ public class OnGoingCall {
         call.disconnect();
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void speaker() {
+    public void speaker(Context context ) {
         assert call != null;
+        AudioManager audioManager = (AudioManager) context.getSystemService(AUDIO_SERVICE);
         audioManager.setMode(AudioManager.MODE_IN_CALL);
-        if (!audioManager.isSpeakerphoneOn())
-            audioManager.setSpeakerphoneOn(true);
+        audioManager.setSpeakerphoneOn(!audioManager.isSpeakerphoneOn());
+
     }
 
 }

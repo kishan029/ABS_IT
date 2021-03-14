@@ -7,10 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.provider.SyncStateContract;
 import android.telecom.Call;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -28,9 +31,13 @@ public class CallActivity extends AppCompatActivity {
     public CompositeDisposable disposables;
     public String number;
     public OnGoingCall ongoingCall;
-    List<Integer> callStatus=new ArrayList<Integer>();
-    public Button hangup,answer;
+    List<Integer> callStatus=new ArrayList<>();
+    public Button hangup,answer,speaker;
     TextView status;
+    Chronometer timertxt;
+    public boolean onCall=false;
+    public CountDownTimer timer;
+    String timerValue;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -44,13 +51,19 @@ public class CallActivity extends AppCompatActivity {
         callStatus.add(Call.STATE_ACTIVE);
         hangup=findViewById(R.id.hangup);
         answer=findViewById(R.id.answer);
+        speaker=findViewById(R.id.speaker);
         status=findViewById(R.id.status);
+        timertxt=findViewById(R.id.timer);
 
         number = Objects.requireNonNull(getIntent().getData()).getSchemeSpecificPart();
 
         hangup.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
+                if(onCall){
+                    stopTimer();
+                }
                 ongoingCall.hangup();
             }
         });
@@ -58,10 +71,28 @@ public class CallActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ongoingCall.answer();
+                timertxt.setVisibility(View.VISIBLE);
+                startTimer();
             }
         });
-
+        speaker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ongoingCall.speaker(CallActivity.this);
+            }
+        });
     }
+
+    private void stopTimer() {
+        timertxt.stop();
+    }
+
+    private void startTimer() {
+        timertxt.start();
+        //Log.w("Timer",""+timertxt.getText());
+        onCall=true;
+    }
+
 
     @Override
     protected void onStart() {
@@ -70,6 +101,7 @@ public class CallActivity extends AppCompatActivity {
         disposables.add(
                 OnGoingCall.state
                         .subscribe(new Consumer<Integer>() {
+                            @RequiresApi(api = Build.VERSION_CODES.M)
                             @Override
                             public void accept(Integer integer) throws Exception {
                                 updateUi(integer);
@@ -92,6 +124,7 @@ public class CallActivity extends AppCompatActivity {
                             }
                         }));
     }
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private Consumer<? super Integer> updateUi(Integer state) {
 
         //callInfo.setText(Constants.asString(state) + "\n" + number);
@@ -153,6 +186,8 @@ public class CallActivity extends AppCompatActivity {
         Intent intent = new Intent(context, CallActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .setData(call.getDetails().getHandle());
+        //intent.putExtra("location",getIntent().getData("location"));
+        //intent.putExtra("name",getIntent().getCh("name"));
         context.startActivity(intent);
     }
 }
