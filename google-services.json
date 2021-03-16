@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "554387140648",
+    "firebase_url": "https://customdialer-c7bfa-default-rtdb.firebaseio.com",
+    "project_id": "customdialer-c7bfa",
+    "storage_bucket": "customdialer-c7bfa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554387140648:android:a24f91a74b5aec427d451d",
+        "android_client_info": {
+          "package_name": "commercial.dlab.abs_it"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554387140648-ni9nmn4pla54un3eh638e90u6fadlafn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "commercial.dlab.abs_it",
+            "certificate_hash": "2dc074970bbcafd97a9d910110534693e5caeb2d"
+          }
+        },
+        {
+          "client_id": "554387140648-o62v337nkb7kgkuviqraqkukvmktq51n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbeunzLAUs1uIyAsSEK-nxJJnDmP8HfwM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554387140648-o62v337nkb7kgkuviqraqkukvmktq51n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

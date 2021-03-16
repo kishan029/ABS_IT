@@ -12,4 +12,12 @@ public class UserData {
         this.username = username;
         this.userlocation = userlocation;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getUserlocation() {
+        return userlocation;
+    }
 }

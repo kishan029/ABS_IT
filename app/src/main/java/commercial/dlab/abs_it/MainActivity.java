@@ -17,6 +17,10 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CALL = 99;
     public GridView gridLayout;
     public DatabaseReference mDatabase;
-    List<UserData> refData=new ArrayList();
+    List<UserData> refData;
 
     int[] user_pic=new int[]{
         R.drawable.ic_smile,
@@ -77,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         gridLayout = findViewById(R.id.grid_layout);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("UserData");
+        Log.w("Dataa",""+mDatabase.child("0"));
+        refData=new ArrayList();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
                 | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
                 | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
@@ -84,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         offerRequestPermissions();
         offerReplacingDefaultDialer();
         getUserData();
-        Log.w("Hello","Kishan");
         Grid_Adapter grid_adapter=new Grid_Adapter(MainActivity.this,user_name,user_location,user_pic);
         gridLayout.setAdapter(grid_adapter);
         gridLayout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -97,21 +102,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getUserData() {
-        Log.w("Data","KIshan");
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        //mDatabase.child("0").child("Cities").setValue("Indore");
+        mDatabase.child("0").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.w("Data","KIshan"+snapshot);
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                        Log.w("Data",""+dataSnapshot.getValue());
-                }
+                //refData.add(userData);
+                Log.w("Data",""+ snapshot.getValue());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.w("Error",""+error);
+                Log.w("Data",error.getMessage().toString());
             }
         });
+
     }
 
     private void makeCall() {
@@ -154,5 +158,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getUserData();
     }
 }
