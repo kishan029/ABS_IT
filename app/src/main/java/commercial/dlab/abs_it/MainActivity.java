@@ -1,6 +1,7 @@
 package commercial.dlab.abs_it;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -21,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -109,10 +111,9 @@ public class MainActivity extends AppCompatActivity {
                 //refData.add(userData);
                 Log.w("Data",""+ snapshot.getValue());
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.w("Data",error.getMessage().toString());
+                Log.w("Data",error.getMessage());
             }
         });
 
