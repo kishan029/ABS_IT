@@ -20,7 +20,8 @@
         android:theme="@style/Theme.ABS_IT">
 
         <activity
-            android:name=".MainActivity">
+            android:name=".MainActivity"
+            android:theme="@style/Theme.Design.NoActionBar">
 <!--            android:windowSoftInputMode="stateAlwaysVisible|adjustResize">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

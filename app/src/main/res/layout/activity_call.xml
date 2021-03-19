@@ -10,14 +10,14 @@
         android:layout_width="150dp"
         android:layout_height="130dp"
         android:elevation="10dp"
-        app:cardBackgroundColor="@color/brown"
+        app:cardBackgroundColor="@color/light_purple"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998">
+        app:layout_constraintVertical_bias="0.323">
 
         <TextView
             android:id="@+id/username"
@@ -28,7 +28,7 @@
             android:singleLine="true"
             android:text="Username"
             android:textAlignment="center"
-            android:textColor="@color/red"
+            android:textColor="@color/pink"
             android:textSize="17dp" />
 
         <ImageView
@@ -48,7 +48,7 @@
             android:singleLine="true"
             android:text="Location"
             android:textAlignment="center"
-            android:textColor="@color/red"
+            android:textColor="@color/pink"
             android:textSize="17dp" />
 
     </androidx.cardview.widget.CardView>

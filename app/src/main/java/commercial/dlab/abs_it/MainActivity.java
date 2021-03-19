@@ -32,11 +32,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 import commercial.dlab.abs_it.Adapter.Grid_Adapter;
+import commercial.dlab.abs_it.Adapter.onGridViewClick;
+
 import static android.Manifest.permission.CALL_PHONE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.telecom.TelecomManager.ACTION_CHANGE_DEFAULT_DIALER;
 import static android.telecom.TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME;
-
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CALL = 99;
     public GridView gridLayout;
@@ -94,10 +95,10 @@ public class MainActivity extends AppCompatActivity {
         getUserData();
         Grid_Adapter grid_adapter=new Grid_Adapter(MainActivity.this,user_name,user_location,user_pic);
         gridLayout.setAdapter(grid_adapter);
-        gridLayout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        grid_adapter.setOnItemClickListener(new onGridViewClick() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                posiition=position;
+            public void onClick(int itemPosition) {
+                posiition=itemPosition;
                 makeCall();
             }
         });
@@ -119,13 +120,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void makeCall() {
-        if (ContextCompat.checkSelfPermission(this, CALL_PHONE) == PERMISSION_GRANTED) {
-            Uri uri = Uri.parse("tel:8271976782");
-            Intent i=new Intent(Intent.ACTION_CALL, uri);
-            i.putExtra("location",user_location[posiition]);
-            i.putExtra("name",user_name[posiition]);
-            startActivity(i);
+    public void makeCall() {
+        if (ContextCompat.checkSelfPermission(MainActivity.this, CALL_PHONE) == PERMISSION_GRANTED) {
+
         }
     }
     private void offerRequestPermissions() {
@@ -146,24 +143,21 @@ public class MainActivity extends AppCompatActivity {
         }else
             offerRequestPermissions();
     }
-
     private void offerReplacingDefaultDialer() {
         TelecomManager telecomManager = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             telecomManager = (TelecomManager) getSystemService(TELECOM_SERVICE);
-
             if (!getPackageName().equals(telecomManager.getDefaultDialerPackage())) {
                 Intent intent = new Intent(ACTION_CHANGE_DEFAULT_DIALER)
                         .putExtra(EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME, getPackageName());
                 startActivity(intent);
             }
         }
-
     }
-
     @Override
     protected void onStart() {
         super.onStart();
         getUserData();
     }
+
 }

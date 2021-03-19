@@ -33,7 +33,7 @@ public class CallActivity extends AppCompatActivity {
     public OnGoingCall ongoingCall;
     List<Integer> callStatus=new ArrayList<>();
     public Button hangup,answer,speaker;
-    TextView status;
+    TextView status,username,user_location;
     Chronometer timertxt;
     public boolean onCall=false;
     public CountDownTimer timer;
@@ -54,6 +54,8 @@ public class CallActivity extends AppCompatActivity {
         speaker=findViewById(R.id.speaker);
         status=findViewById(R.id.status);
         timertxt=findViewById(R.id.timer);
+        username=findViewById(R.id.username);
+        user_location=findViewById(R.id.user_location);
 
         number = Objects.requireNonNull(getIntent().getData()).getSchemeSpecificPart();
 
@@ -81,6 +83,9 @@ public class CallActivity extends AppCompatActivity {
                 ongoingCall.speaker(CallActivity.this);
             }
         });
+        Bundle bundle=getIntent().getExtras();
+        username.setText("Kishan"+bundle.getString("name"));
+        user_location.setText(getIntent().getExtras().getString("location"));
     }
 
     private void stopTimer() {
@@ -186,8 +191,6 @@ public class CallActivity extends AppCompatActivity {
         Intent intent = new Intent(context, CallActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .setData(call.getDetails().getHandle());
-        //intent.putExtra("location",getIntent().getData("location"));
-        //intent.putExtra("name",getIntent().getCh("name"));
         context.startActivity(intent);
     }
 }
